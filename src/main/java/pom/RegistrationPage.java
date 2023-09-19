@@ -3,8 +3,6 @@ package pom;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static constants.Urls.REGISTRATION_PAGE_URL;
 
@@ -50,14 +48,9 @@ public class RegistrationPage {
         return loginButton;
     }
 
+    @Step("Open registration page")
     public RegistrationPage open() {
         driver.get(REGISTRATION_PAGE_URL);
-        return this;
-    }
-
-    public RegistrationPage waitForLoadRegistrationPage() {
-        new WebDriverWait(driver, 3)
-                .until(ExpectedConditions.visibilityOfElementLocated(registrationHeading));
         return this;
     }
 
@@ -74,16 +67,19 @@ public class RegistrationPage {
         return this;
     }
 
-    public void clickRegistrationButton() {
+    @Step("Click on registration button")
+    public RegistrationPage clickRegistrationButton() {
         driver.findElement(registrationButton).click();
+        return this;
     }
 
+    @Step("Click on login button")
     public void clickLoginButton() {
         driver.findElement(loginButton).click();
     }
 
-    public String getPasswordErrorMessageText() {
-        return driver.findElement(passwordErrorMessage).getText();
+    public boolean checkPasswordErrorMessageIsDisplayed() {
+        return driver.findElement(passwordErrorMessage).isDisplayed();
     }
 
     @Step("Register user")

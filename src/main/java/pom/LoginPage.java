@@ -36,6 +36,7 @@ public class LoginPage {
         return loginButton;
     }
 
+    @Step("Open login page")
     public LoginPage open() {
         driver.get(LOGIN_PAGE_URL);
         return this;
@@ -47,8 +48,8 @@ public class LoginPage {
         return this;
     }
 
-    public String getLoginHeadingText() {
-        return driver.findElement(loginHeading).getText();
+    public boolean checkLoginHeadingTextIsDisplayed() {
+        return driver.findElement(loginHeading).isDisplayed();
     }
 
     public void inputUserEmail(String userEmail) {

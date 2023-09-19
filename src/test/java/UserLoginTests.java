@@ -4,10 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import pom.MainPage;
-import pom.LoginPage;
-import pom.PasswordRecoveryPage;
-import pom.RegistrationPage;
+import pom.*;
 import user.UserApi;
 import user.models.CreateUserRequest;
 import user.models.UserSuccessResponse;
@@ -31,9 +28,9 @@ public class UserLoginTests {
         userSuccessResponse = response.as(UserSuccessResponse.class);
     }
 
-    @DisplayName("Check login user from main page")
+    @DisplayName("Check user's login from main page")
     @Test
-    public void loginUserFromMainPage() {
+    public void checkLoginUserFromMainPage() {
         MainPage mainPage = new MainPage(driver);
         LoginPage loginPage = new LoginPage(driver);
 
@@ -50,28 +47,30 @@ public class UserLoginTests {
                 .waitForLoadMainPage()
                 .checkCheckoutButtonIsDisplayed();
 
-        assertTrue("The user is not logged in, the checkout button should be displayed", actualResult);
+        assertTrue("The user is not logged in, checkout button should be displayed", actualResult);
     }
 
-    @DisplayName("Check login user from login page")
+    @DisplayName("Check user's login using personal account button")
     @Test
     public void loginUserFromLoginPage() {
         MainPage mainPage = new MainPage(driver);
         LoginPage loginPage = new LoginPage(driver);
+        PageHeader pageHeader = new PageHeader(driver);
 
-        loginPage
-                .open()
-                .waitForLoadLoginPage()
-                .loginUser(createUserRequest.getEmail(), createUserRequest.getPassword());
+        mainPage.open();
+
+        pageHeader.clickPersonalAccountButton();
+
+        loginPage.loginUser(createUserRequest.getEmail(), createUserRequest.getPassword());
 
         boolean actualResult = mainPage
                 .waitForLoadMainPage()
                 .checkCheckoutButtonIsDisplayed();
 
-        assertTrue("The user is not logged in, the checkout button should be displayed", actualResult);
+        assertTrue("The user is not logged in, checkout button should be displayed", actualResult);
     }
 
-    @DisplayName("Check login user from registration page")
+    @DisplayName("Check user's login from registration page")
     @Test
     public void checkLoginUserFromRegistrationPage() {
         RegistrationPage registrationPage = new RegistrationPage(driver);
@@ -80,21 +79,18 @@ public class UserLoginTests {
 
         registrationPage
                 .open()
-                .waitForLoadRegistrationPage()
                 .clickLoginButton();
 
-        loginPage
-                .waitForLoadLoginPage()
-                .loginUser(createUserRequest.getEmail(), createUserRequest.getPassword());
+        loginPage.loginUser(createUserRequest.getEmail(), createUserRequest.getPassword());
 
         boolean actualResult = mainPage
                 .waitForLoadMainPage()
                 .checkCheckoutButtonIsDisplayed();
 
-        assertTrue("The user is not logged in, the checkout button should be displayed", actualResult);
+        assertTrue("The user is not logged in, checkout button should be displayed", actualResult);
     }
 
-    @DisplayName("Check login user from password recovery page")
+    @DisplayName("Check user's login from password recovery page")
     @Test
     public void checkLoginUserFromPasswordRecoveryPage() {
         PasswordRecoveryPage passwordRecoveryPage = new PasswordRecoveryPage(driver);
@@ -113,7 +109,7 @@ public class UserLoginTests {
                 .waitForLoadMainPage()
                 .checkCheckoutButtonIsDisplayed();
 
-        assertTrue("The user is not logged in, the checkout button should be displayed", actualResult);
+        assertTrue("The user is not logged in, checkout button should be displayed", actualResult);
     }
 
     @After

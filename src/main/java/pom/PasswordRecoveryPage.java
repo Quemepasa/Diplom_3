@@ -1,5 +1,6 @@
 package pom;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -25,6 +26,7 @@ public class PasswordRecoveryPage {
         return loginButton;
     }
 
+    @Step("Open password recovery page")
     public PasswordRecoveryPage open() {
         driver.get(PASSWORD_RECOVERY_PAGE_URL);
         return this;
@@ -36,6 +38,7 @@ public class PasswordRecoveryPage {
         return this;
     }
 
+    @Step("Click on login button")
     public void clickLoginButton() {
         driver.findElement(loginButton).click();
     }

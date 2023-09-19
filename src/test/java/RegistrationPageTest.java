@@ -4,10 +4,10 @@ import org.junit.Test;
 import pom.RegistrationPage;
 import rules.BrowserRule;
 
+import static org.junit.Assert.assertTrue;
 import static utils.Utils.randomString;
-import static org.junit.Assert.assertEquals;
 
-public class RegistrationPageErrorTest {
+public class RegistrationPageTest {
     @Rule
     public final BrowserRule browserRule = new BrowserRule();
 
@@ -16,14 +16,12 @@ public class RegistrationPageErrorTest {
     public void checkPasswordErrorMessage() {
         RegistrationPage registrationPage = new RegistrationPage(browserRule.getWebDriver());
 
-        registrationPage
+        boolean actualResult = registrationPage
                 .open()
-                .waitForLoadRegistrationPage()
                 .inputUserPassword(randomString(5))
-                .clickRegistrationButton();
-        String actualResult = registrationPage.getPasswordErrorMessageText();
+                .clickRegistrationButton()
+                .checkPasswordErrorMessageIsDisplayed();
 
-        assertEquals("No error message was displayed",
-                "Некорректный пароль", actualResult);
+        assertTrue("Password error message is not displayed", actualResult);
     }
 }

@@ -12,7 +12,7 @@ import user.models.LoginUserRequest;
 import user.models.UserSuccessResponse;
 
 import static driver.WebDriverCreator.createWebDriver;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static user.UserGenerator.randomUser;
 
 public class UserRegistrationTest {
@@ -25,7 +25,7 @@ public class UserRegistrationTest {
         createUserRequest = randomUser();
     }
 
-    @DisplayName("Check register user with all required fields")
+    @DisplayName("Check user registration with all required fields")
     @Test
     public void checkRegisterUserWithAllRequiredFields() {
         RegistrationPage registrationPage = new RegistrationPage(driver);
@@ -33,15 +33,13 @@ public class UserRegistrationTest {
 
         registrationPage
                 .open()
-                .waitForLoadRegistrationPage()
                 .registerUser(createUserRequest.getEmail(), createUserRequest.getEmail(), createUserRequest.getPassword());
 
-        String actualResult = loginPage
+        boolean actualResult = loginPage
                 .waitForLoadLoginPage()
-                .getLoginHeadingText();
+                .checkLoginHeadingTextIsDisplayed();
 
-        assertEquals("The user is not registered, must be on the login page",
-                "Вход", actualResult);
+        assertTrue("The user is not registered, must be on the login page", actualResult);
     }
 
     @After

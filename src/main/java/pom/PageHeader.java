@@ -1,5 +1,6 @@
 package pom;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -20,10 +21,12 @@ public class PageHeader {
         return constructorButton;
     }
 
+    @Step("Click on personal account button")
     public void clickPersonalAccountButton() {
         driver.findElement(personalAccountButton).click();
     }
 
+    @Step("Click on constructor button")
     public void clickConstructorButton() {
         driver.findElement(constructorButton).click();
     }

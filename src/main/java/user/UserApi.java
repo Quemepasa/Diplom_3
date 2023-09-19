@@ -19,7 +19,6 @@ public class UserApi {
         RestAssured.baseURI = BASE_URI;
     }
 
-    @Step("Create user")
     public Response createUser(CreateUserRequest createUserRequest) {
         return given()
                 .header("Content-type", "application/json")
@@ -29,7 +28,6 @@ public class UserApi {
                 .post(CREATE_URL);
     }
 
-    @Step("Login user")
     public Response login(LoginUserRequest loginUserRequest) {
         return given()
                 .header("Content-type", "application/json")
@@ -39,7 +37,6 @@ public class UserApi {
                 .post(LOGIN_URL);
     }
 
-    @Step("Delete user")
     public void deleteUser(UserSuccessResponse userSuccessResponse, Object request) {
         given()
                 .header("Content-type", "application/json")

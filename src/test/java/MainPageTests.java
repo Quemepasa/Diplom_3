@@ -1,56 +1,53 @@
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.Rule;
 import org.junit.Test;
-import pom.LoginPage;
 import pom.MainPage;
-import pom.PageHeader;
 import rules.BrowserRule;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class MainPageTests {
     @Rule
     public final BrowserRule browserRule = new BrowserRule();
 
-    @DisplayName("Check the click on the personal account button")
+    @DisplayName("Check switching to buns section")
     @Test
-    public void checkClickOnPersonalAccountButton() {
+    public void checkSwitchingToBunsSection() {
         MainPage mainPage = new MainPage(browserRule.getWebDriver());
-        PageHeader pageHeader = new PageHeader(browserRule.getWebDriver());
-        LoginPage loginPage = new LoginPage(browserRule.getWebDriver());
 
-        mainPage
+        boolean actualResult = mainPage
                 .open()
-                .waitForLoadMainPage();
+                .clickTabFillings()
+                .clickTabBuns()
+                .checkSectionBunsIsDisplayed();
 
-        pageHeader.clickPersonalAccountButton();
-
-        String actualResult = loginPage
-                .waitForLoadLoginPage()
-                .getLoginHeadingText();
-
-        assertEquals("No error message was displayed",
-                "Вход", actualResult);
+        assertTrue("The buns section is not selected", actualResult);
     }
 
-    @DisplayName("Check the click on the constructor button")
+    @DisplayName("Check switching to sauces section")
     @Test
-    public void checkClickConstructorButton() {
+    public void checkSwitchingToSaucesSection() {
         MainPage mainPage = new MainPage(browserRule.getWebDriver());
-        LoginPage loginPage = new LoginPage(browserRule.getWebDriver());
-        PageHeader pageHeader = new PageHeader(browserRule.getWebDriver());
 
-        loginPage
+        boolean actualResult = mainPage
                 .open()
-                .waitForLoadLoginPage();
+                .clickTabSauces()
+                .checkSectionSaucesIsDisplayed();
 
-        pageHeader.clickConstructorButton();
+        assertTrue("The sauces section is not selected", actualResult);
+    }
 
-        String actualResult = mainPage
-                .waitForLoadMainPage()
-                .getMainHeadingText();
+    @DisplayName("Check switching to fillings section")
+    @Test
+    public void checkSwitchingToFillingsSection() {
+        MainPage mainPage = new MainPage(browserRule.getWebDriver());
 
-        assertEquals("No error message was displayed",
-                "Соберите бургер", actualResult);
+        boolean actualResult = mainPage
+                .open()
+                .clickTabFillings()
+                .checkSectionFillingsIsDisplayed();
+
+        assertTrue("The fillings section is not selected", actualResult);
+
     }
 }

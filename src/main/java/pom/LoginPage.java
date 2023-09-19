@@ -1,5 +1,6 @@
 package pom;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -41,7 +42,7 @@ public class LoginPage {
     }
 
     public LoginPage waitForLoadLoginPage() {
-        new WebDriverWait(driver, 8)
+        new WebDriverWait(driver, 3)
                 .until(ExpectedConditions.visibilityOfElementLocated(loginHeading));
         return this;
     }
@@ -62,6 +63,7 @@ public class LoginPage {
         driver.findElement(loginButton).click();
     }
 
+    @Step("Login user")
     public void loginUser(String userEmail, String userPassword){
         inputUserEmail(userEmail);
         inputUserPassword(userPassword);

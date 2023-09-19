@@ -31,7 +31,7 @@ public class PasswordRecoveryPage {
     }
 
     public PasswordRecoveryPage waitForLoadPasswordRecoveryPage() {
-        new WebDriverWait(driver, 8)
+        new WebDriverWait(driver, 3)
                 .until(ExpectedConditions.visibilityOfElementLocated(passwordRecoveryHeading));
         return this;
     }

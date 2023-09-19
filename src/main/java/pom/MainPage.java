@@ -37,7 +37,7 @@ public class MainPage {
     }
 
     public MainPage waitForLoadMainPage() {
-        new WebDriverWait(driver, 8)
+        new WebDriverWait(driver, 3)
                 .until(ExpectedConditions.visibilityOfElementLocated(mainHeading));
         return this;
     }

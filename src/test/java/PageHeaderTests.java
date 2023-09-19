@@ -47,4 +47,22 @@ public class PageHeaderTests {
 
         assertTrue("The user is not on constructor page", actualResult);
     }
+
+    @DisplayName("Check click on logo Stellar Burgers")
+    @Test
+    public void checkClickLogoStellarBurgers() {
+        MainPage mainPage = new MainPage(browserRule.getWebDriver());
+        LoginPage loginPage = new LoginPage(browserRule.getWebDriver());
+        PageHeader pageHeader = new PageHeader(browserRule.getWebDriver());
+
+        loginPage.open();
+
+        pageHeader.clickOnLogoStellarBurgers();
+
+        boolean actualResult = mainPage
+                .waitForLoadMainPage()
+                .checkMainHeadingIsDisplayed();
+
+        assertTrue("The user is not on constructor page", actualResult);
+    }
 }

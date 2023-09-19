@@ -33,7 +33,7 @@ public class UserRegistrationTest {
 
         registrationPage
                 .open()
-                .registerUser(createUserRequest.getEmail(), createUserRequest.getEmail(), createUserRequest.getPassword());
+                .registerUser(createUserRequest.getName(), createUserRequest.getEmail(), createUserRequest.getPassword());
 
         boolean actualResult = loginPage
                 .waitForLoadLoginPage()

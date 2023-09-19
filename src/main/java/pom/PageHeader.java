@@ -8,6 +8,7 @@ public class PageHeader {
     private final WebDriver driver;
     private final By personalAccountButton = By.xpath(".//p[text()='Личный Кабинет']");
     private final By constructorButton = By.xpath(".//p[text()='Конструктор']");
+    private final By logoStellarBurgers = By.xpath(".//div/a[@href='/']");
 
     public PageHeader(WebDriver driver) {
         this.driver = driver;
@@ -21,6 +22,10 @@ public class PageHeader {
         return constructorButton;
     }
 
+    public By getLogoStellarBurgers() {
+        return logoStellarBurgers;
+    }
+
     @Step("Click on personal account button")
     public void clickPersonalAccountButton() {
         driver.findElement(personalAccountButton).click();
@@ -29,5 +34,10 @@ public class PageHeader {
     @Step("Click on constructor button")
     public void clickConstructorButton() {
         driver.findElement(constructorButton).click();
+    }
+
+    @Step("Click on logo Stellar Burgers")
+    public void clickOnLogoStellarBurgers() {
+        driver.findElement(logoStellarBurgers).click();
     }
 }

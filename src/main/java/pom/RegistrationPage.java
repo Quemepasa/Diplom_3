@@ -67,7 +67,6 @@ public class RegistrationPage {
         return this;
     }
 
-    @Step("Click on registration button")
     public RegistrationPage clickRegistrationButton() {
         driver.findElement(registrationButton).click();
         return this;

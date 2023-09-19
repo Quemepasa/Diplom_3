@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import pom.LoginPage;
 import pom.RegistrationPage;
-import user.UserActions;
+import user.UserApi;
 import user.models.CreateUserRequest;
 import user.models.LoginUserRequest;
 import user.models.UserSuccessResponse;
@@ -25,9 +25,9 @@ public class UserRegistrationTest {
         createUserRequest = randomUser();
     }
 
-    @DisplayName("Register user with all required fields")
+    @DisplayName("Check register user with all required fields")
     @Test
-    public void registerUserWithAllRequiredFields() {
+    public void checkRegisterUserWithAllRequiredFields() {
         RegistrationPage registrationPage = new RegistrationPage(driver);
         LoginPage loginPage = new LoginPage(driver);
 
@@ -46,11 +46,11 @@ public class UserRegistrationTest {
 
     @After
     public void tearDown() {
-        UserActions userActions = new UserActions();
+        UserApi userApi = new UserApi();
         LoginUserRequest loginUserRequest = new LoginUserRequest(createUserRequest.getEmail(), createUserRequest.getPassword());
-        Response response = userActions.login(loginUserRequest);
+        Response response = userApi.login(loginUserRequest);
         UserSuccessResponse userSuccessResponse = response.as(UserSuccessResponse.class);
-        userActions.deleteUser(userSuccessResponse, createUserRequest);
+        userApi.deleteUser(userSuccessResponse, createUserRequest);
 
         driver.quit();
     }

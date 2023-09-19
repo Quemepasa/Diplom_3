@@ -64,7 +64,7 @@ public class LoginPage {
     }
 
     @Step("Login user")
-    public void loginUser(String userEmail, String userPassword){
+    public void loginUser(String userEmail, String userPassword) {
         inputUserEmail(userEmail);
         inputUserPassword(userPassword);
         clickLoginButton();

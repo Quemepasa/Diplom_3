@@ -9,13 +9,13 @@ import user.models.UserSuccessResponse;
 
 import static io.restassured.RestAssured.given;
 
-public class UserActions {
+public class UserApi {
     private static final String BASE_URI = "https://stellarburgers.nomoreparties.site";
     private static final String CREATE_URL = "api/auth/register";
     private static final String LOGIN_URL = "api/auth/login";
     private static final String DELETE_URL = "api/auth/user";
 
-    public UserActions() {
+    public UserApi() {
         RestAssured.baseURI = BASE_URI;
     }
 

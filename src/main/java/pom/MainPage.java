@@ -12,7 +12,6 @@ public class MainPage {
 
     private final By mainHeading = By.xpath(".//h1[text()='Соберите бургер']");
     private final By loginButton = By.xpath(".//button[text()='Войти в аккаунт']");
-
     private final By checkoutButton = By.xpath(".//button[text()='Оформить заказ']");
 
     public MainPage(WebDriver driver) {
@@ -40,6 +39,10 @@ public class MainPage {
         new WebDriverWait(driver, 3)
                 .until(ExpectedConditions.visibilityOfElementLocated(mainHeading));
         return this;
+    }
+
+    public String getMainHeadingText() {
+        return driver.findElement(mainHeading).getText();
     }
 
     public Boolean checkCheckoutButtonIsDisplayed() {

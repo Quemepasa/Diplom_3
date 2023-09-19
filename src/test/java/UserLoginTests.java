@@ -8,7 +8,7 @@ import pom.MainPage;
 import pom.LoginPage;
 import pom.PasswordRecoveryPage;
 import pom.RegistrationPage;
-import user.UserActions;
+import user.UserApi;
 import user.models.CreateUserRequest;
 import user.models.UserSuccessResponse;
 
@@ -17,7 +17,7 @@ import static org.junit.Assert.assertTrue;
 import static user.UserGenerator.randomUser;
 
 public class UserLoginTests {
-    private UserActions userActions;
+    private UserApi userApi;
     private UserSuccessResponse userSuccessResponse;
     private WebDriver driver;
     private CreateUserRequest createUserRequest;
@@ -26,12 +26,12 @@ public class UserLoginTests {
     public void setUp() {
         driver = createWebDriver();
         createUserRequest = randomUser();
-        userActions = new UserActions();
-        Response response = userActions.createUser(createUserRequest);
+        userApi = new UserApi();
+        Response response = userApi.createUser(createUserRequest);
         userSuccessResponse = response.as(UserSuccessResponse.class);
     }
 
-    @DisplayName("Login user from main page")
+    @DisplayName("Check login user from main page")
     @Test
     public void loginUserFromMainPage() {
         MainPage mainPage = new MainPage(driver);
@@ -53,7 +53,7 @@ public class UserLoginTests {
         assertTrue("The user is not logged in, the checkout button should be displayed", actualResult);
     }
 
-    @DisplayName("Login user from login page")
+    @DisplayName("Check login user from login page")
     @Test
     public void loginUserFromLoginPage() {
         MainPage mainPage = new MainPage(driver);
@@ -71,9 +71,9 @@ public class UserLoginTests {
         assertTrue("The user is not logged in, the checkout button should be displayed", actualResult);
     }
 
-    @DisplayName("Login user from registration page")
+    @DisplayName("Check login user from registration page")
     @Test
-    public void loginUserFromRegistrationPage() {
+    public void checkLoginUserFromRegistrationPage() {
         RegistrationPage registrationPage = new RegistrationPage(driver);
         LoginPage loginPage = new LoginPage(driver);
         MainPage mainPage = new MainPage(driver);
@@ -94,9 +94,9 @@ public class UserLoginTests {
         assertTrue("The user is not logged in, the checkout button should be displayed", actualResult);
     }
 
-    @DisplayName("Login user from password recovery page")
+    @DisplayName("Check login user from password recovery page")
     @Test
-    public void loginUserFromPasswordRecoveryPage() {
+    public void checkLoginUserFromPasswordRecoveryPage() {
         PasswordRecoveryPage passwordRecoveryPage = new PasswordRecoveryPage(driver);
         LoginPage loginPage = new LoginPage(driver);
         MainPage mainPage = new MainPage(driver);
@@ -119,6 +119,6 @@ public class UserLoginTests {
     @After
     public void tearDown() {
         driver.quit();
-        userActions.deleteUser(userSuccessResponse, createUserRequest);
+        userApi.deleteUser(userSuccessResponse, createUserRequest);
     }
 }

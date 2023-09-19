@@ -41,9 +41,11 @@ public class RegistrationPage {
     public By getRegistrationButton() {
         return registrationButton;
     }
+
     public By getPasswordErrorMessage() {
         return passwordErrorMessage;
     }
+
     public By getLoginButton() {
         return loginButton;
     }
@@ -85,7 +87,7 @@ public class RegistrationPage {
     }
 
     @Step("Register user")
-    public void registerUser(String username, String userEmail, String userPassword){
+    public void registerUser(String username, String userEmail, String userPassword) {
         inputUsername(username);
         inputUserEmail(userEmail);
         inputUserPassword(userPassword);

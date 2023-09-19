@@ -4,7 +4,7 @@ import org.junit.Test;
 import pom.RegistrationPage;
 import rules.BrowserRule;
 
-import static constants.utils.Utils.randomString;
+import static utils.Utils.randomString;
 import static org.junit.Assert.assertEquals;
 
 public class RegistrationPageErrorTest {

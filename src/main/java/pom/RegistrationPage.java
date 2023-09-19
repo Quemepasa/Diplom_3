@@ -58,24 +58,25 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage inputUsernameInNameField(String username) {
+    public void inputUsername(String username) {
         driver.findElement(nameField).sendKeys(username);
-        return this;
     }
 
-    public RegistrationPage inputUserEmailInEmailField(String userEmail) {
+    public void inputUserEmail(String userEmail) {
         driver.findElement(emailField).sendKeys(userEmail);
-        return this;
     }
 
-    public RegistrationPage inputUserPasswordInPasswordField(String userPassword) {
+    public RegistrationPage inputUserPassword(String userPassword) {
         driver.findElement(passwordField).sendKeys(userPassword);
         return this;
     }
 
-    public RegistrationPage clickRegistrationButton() {
+    public void clickRegistrationButton() {
         driver.findElement(registrationButton).click();
-        return this;
+    }
+
+    public void clickLoginButton() {
+        driver.findElement(loginButton).click();
     }
 
     public String getPasswordErrorMessageText() {
@@ -83,9 +84,9 @@ public class RegistrationPage {
     }
 
     public void registerUser(String username, String userEmail, String userPassword){
-        inputUsernameInNameField(username);
-        inputUserEmailInEmailField(userEmail);
-        inputUserPasswordInPasswordField(userPassword);
+        inputUsername(username);
+        inputUserEmail(userEmail);
+        inputUserPassword(userPassword);
         clickRegistrationButton();
     }
 }

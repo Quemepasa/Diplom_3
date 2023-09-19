@@ -6,7 +6,7 @@ import rules.BrowserRule;
 
 import static org.junit.Assert.assertEquals;
 
-public class UserRegistration {
+public class UserRegistrationTests {
     @Rule
     public final BrowserRule browserRule = new BrowserRule();
 
@@ -20,10 +20,11 @@ public class UserRegistration {
                 .waitForLoadRegistrationPage()
                 .registerUser("vvv", "vvvv@vvv.vvv", "vvvvvv");
 
-        loginPage.waitForLoadLoginPage();
-        String actualResult = loginPage.getLoginHeadingText();
+        String actualResult = loginPage
+                .waitForLoadLoginPage()
+                .getLoginHeadingText();
 
-        assertEquals("Invalid heading text of the login page",
+        assertEquals("The user is not registered, must be on the login page",
                 "Вход", actualResult);
     }
 
@@ -31,11 +32,11 @@ public class UserRegistration {
     public void checkPasswordErrorMessage() {
         RegistrationPage registrationPage = new RegistrationPage(browserRule.getWebDriver());
 
-        registrationPage
+        String actualResult = registrationPage
                 .open()
                 .waitForLoadRegistrationPage()
-                .inputUserPasswordInPasswordField("vvv");
-        String actualResult = registrationPage.getPasswordErrorMessageText();
+                .inputUserPassword("vvv")
+                .getPasswordErrorMessageText();
 
         assertEquals("No error message was displayed",
                 "Некорректный пароль", actualResult);

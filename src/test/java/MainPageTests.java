@@ -4,9 +4,12 @@ import org.junit.Test;
 import pom.MainPage;
 import rules.BrowserRule;
 
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class MainPageTests {
+    private final static String CURRENTLY_SELECTED_TAB = "tab_tab_type_current";
+
     @Rule
     public final BrowserRule browserRule = new BrowserRule();
 
@@ -15,13 +18,13 @@ public class MainPageTests {
     public void checkSwitchingToBunsSection() {
         MainPage mainPage = new MainPage(browserRule.getWebDriver());
 
-        boolean actualResult = mainPage
+        String actualResult = mainPage
                 .open()
                 .clickTabFillings()
                 .clickTabBuns()
-                .checkSectionBunsIsDisplayed();
+                .checkBunsSectionIsSelected();
 
-        assertTrue("The buns section is not selected", actualResult);
+        assertThat("The buns section is not selected", actualResult, containsString(CURRENTLY_SELECTED_TAB));
     }
 
     @DisplayName("Check switching to sauces section")
@@ -29,12 +32,12 @@ public class MainPageTests {
     public void checkSwitchingToSaucesSection() {
         MainPage mainPage = new MainPage(browserRule.getWebDriver());
 
-        boolean actualResult = mainPage
+        String actualResult = mainPage
                 .open()
                 .clickTabSauces()
-                .checkSectionSaucesIsDisplayed();
+                .checkSaucesSectionIsSelected();
 
-        assertTrue("The sauces section is not selected", actualResult);
+        assertThat("The sauces section is not selected", actualResult, containsString(CURRENTLY_SELECTED_TAB));
     }
 
     @DisplayName("Check switching to fillings section")
@@ -42,12 +45,11 @@ public class MainPageTests {
     public void checkSwitchingToFillingsSection() {
         MainPage mainPage = new MainPage(browserRule.getWebDriver());
 
-        boolean actualResult = mainPage
+        String actualResult = mainPage
                 .open()
                 .clickTabFillings()
-                .checkSectionFillingsIsDisplayed();
+                .checkFillingsSectionIsSelected();
 
-        assertTrue("The fillings section is not selected", actualResult);
-
+        assertThat("The fillings section is not selected", actualResult, containsString(CURRENTLY_SELECTED_TAB));
     }
 }

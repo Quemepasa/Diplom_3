@@ -14,12 +14,9 @@ public class MainPage {
     private final By mainHeading = By.xpath(".//h1[text()='Соберите бургер']");
     private final By loginButton = By.xpath(".//button[text()='Войти в аккаунт']");
     private final By checkoutButton = By.xpath(".//button[text()='Оформить заказ']");
-    private final By tabBuns = By.xpath("//span[text()='Булки']");
-    private final By tabSauces = By.xpath(".//span[text()='Соусы']");
-    private final By tabFillings = By.xpath(".//span[text()='Начинки']");
-    private final By sectionBuns = By.xpath(".//h2[text()='Булки']");
-    private final By sectionSauces = By.xpath(".//h2[text()='Соусы']");
-    private final By sectionFillings = By.xpath(".//h2[text()='Начинки']");
+    private final By tabBuns = By.xpath(".//span[text()='Булки']/parent::div");
+    private final By tabSauces = By.xpath(".//span[text()='Соусы']/parent::div");
+    private final By tabFillings = By.xpath(".//span[text()='Начинки']/parent::div");
 
     public MainPage(WebDriver driver) {
         this.driver = driver;
@@ -49,17 +46,6 @@ public class MainPage {
         return tabFillings;
     }
 
-    public By getSectionBuns() {
-        return sectionBuns;
-    }
-
-    public By getSectionSauces() {
-        return sectionSauces;
-    }
-
-    public By getSectionFillings() {
-        return sectionFillings;
-    }
 
     @Step("Open main page")
     public MainPage open() {
@@ -103,15 +89,15 @@ public class MainPage {
         return this;
     }
 
-    public boolean checkSectionBunsIsDisplayed() {
-        return driver.findElement(sectionBuns).isDisplayed();
+    public String checkBunsSectionIsSelected() {
+        return driver.findElement(tabBuns).getAttribute("class");
     }
 
-    public boolean checkSectionSaucesIsDisplayed() {
-        return driver.findElement(sectionSauces).isDisplayed();
+    public String checkSaucesSectionIsSelected() {
+        return driver.findElement(tabSauces).getAttribute("class");
     }
 
-    public boolean checkSectionFillingsIsDisplayed() {
-        return driver.findElement(sectionFillings).isDisplayed();
+    public String checkFillingsSectionIsSelected() {
+        return driver.findElement(tabFillings).getAttribute("class");
     }
 }
